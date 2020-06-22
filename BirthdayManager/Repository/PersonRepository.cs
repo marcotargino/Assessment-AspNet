@@ -29,8 +29,8 @@ namespace BirthdayManager.Repository
 
                 command.CommandText = sql;
 
-                command.Parameters.AddWithValue("P1", person.Name);
-                command.Parameters.AddWithValue("P2", person.Surname);
+                command.Parameters.AddWithValue("P1", person.Firstname);
+                command.Parameters.AddWithValue("P2", person.Lastname);
                 command.Parameters.AddWithValue("P3", person.Birthdate);
                 command.Parameters.AddWithValue("P4", person.Age);
 
@@ -57,8 +57,8 @@ namespace BirthdayManager.Repository
 
                 var command = connection.CreateCommand();
                 command.CommandText = sql;
-                command.Parameters.AddWithValue("P1", person.Name);
-                command.Parameters.AddWithValue("P2", person.Surname);
+                command.Parameters.AddWithValue("P1", person.Firstname);
+                command.Parameters.AddWithValue("P2", person.Lastname);
                 command.Parameters.AddWithValue("P3", person.Birthdate);
                 command.Parameters.AddWithValue("P4", person.Age);
                 command.Parameters.AddWithValue("P5", person.Id);
@@ -118,8 +118,8 @@ namespace BirthdayManager.Repository
                     result.Add(new Person()
                     {
                         Id = dr.GetInt32("ID"),
-                        Name = dr.GetString("NAME"),
-                        Surname = dr.GetString("SURNAME"),
+                        Firstname = dr.GetString("NAME"),
+                        Lastname = dr.GetString("SURNAME"),
                         Birthdate = dr.GetDateTime("BIRTHDATE"),
                         Age = dr.GetInt32("AGE")
                     });
@@ -158,8 +158,8 @@ namespace BirthdayManager.Repository
                     result = new Person()
                     {
                         Id = dr.GetInt32("ID"),
-                        Name = dr.GetString("NAME"),
-                        Surname = dr.GetString("SURNAME"),
+                        Firstname = dr.GetString("NAME"),
+                        Lastname = dr.GetString("SURNAME"),
                         Birthdate = dr.GetDateTime("BIRTHDATE"),
                         Age = dr.GetInt32("AGE")
                     };
@@ -202,8 +202,8 @@ namespace BirthdayManager.Repository
                     result.Add(new Person()
                     {
                         Id = dr.GetInt32("ID"),
-                        Name = dr.GetString("NAME"),
-                        Surname = dr.GetString("SURNAME"),
+                        Firstname = dr.GetString("NAME"),
+                        Lastname = dr.GetString("SURNAME"),
                         Birthdate = dr.GetDateTime("BIRTHDATE"),
                         Age = dr.GetInt32("AGE")
                     });

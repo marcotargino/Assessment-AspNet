@@ -6,7 +6,7 @@
 
 <h1>Delete a record</h1>
 
-<h3>Are you sure you want to delete @Model.Name @Model.Surname?</h3>
+<h3>Are you sure you want to delete @Model.Firstname @Model.Lastname?</h3>
 <div>
     <hr />
     <dl class="row">
@@ -17,16 +17,16 @@
             @Html.DisplayFor(model => model.Id)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Firstname)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Firstname)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Surname)
+            @Html.DisplayNameFor(model => model.Lastname)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Surname)
+            @Html.DisplayFor(model => model.Lastname)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Birthdate)
