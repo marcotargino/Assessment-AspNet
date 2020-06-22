@@ -24,7 +24,7 @@ namespace BirthdayManager.Repository
         {
             using(SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
-                string sql = "INSERT INTO PERSON(NAME, SURNAME, BIRTHDATE, AGE) VALUES (@P1, @P2, @P3, @P4)";
+                string sql = "INSERT INTO PERSON(FIRSTNAME, LASTNAME, BIRTHDATE, AGE) VALUES (@P1, @P2, @P3, @P4)";
 
                 DateTime today = DateTime.Today.Date;
                 DateTime birthday = new DateTime(today.Year, person.Birthdate.Month, person.Birthdate.Day);
