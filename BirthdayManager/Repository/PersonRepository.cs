@@ -25,10 +25,21 @@ namespace BirthdayManager.Repository
             {
                 string sql = "INSERT INTO PERSON(NAME, SURNAME, BIRTHDATE, AGE) VALUES (@P1, @P2, @P3, @P4)";
 
+                DateTime today = DateTime.Today.Date;
+                DateTime birthday = new DateTime(today.Year, person.Birthdate.Month, person.Birthdate.Day);
+
+                int age = today.Year - person.Birthdate.Year;
+
+                if (birthday < today)
+                {
+                    birthday = birthday.AddYears(1);
+                    age = age + 1;
+                }
+
+                person.Age = age;
+
                 var command = connection.CreateCommand();
-
                 command.CommandText = sql;
-
                 command.Parameters.AddWithValue("P1", person.Firstname);
                 command.Parameters.AddWithValue("P2", person.Lastname);
                 command.Parameters.AddWithValue("P3", person.Birthdate);
@@ -54,6 +65,19 @@ namespace BirthdayManager.Repository
                                 AGE = @P4
                                 WHERE ID = @P5
                 ";
+
+                DateTime today = DateTime.Today.Date;
+                DateTime birthday = new DateTime(today.Year, person.Birthdate.Month, person.Birthdate.Day);
+
+                int age = today.Year - person.Birthdate.Year;
+
+                if (birthday < today)
+                {
+                    birthday = birthday.AddYears(1);
+                    age = age + 1;
+                }
+
+                person.Age = age;
 
                 var command = connection.CreateCommand();
                 command.CommandText = sql;
