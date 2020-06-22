@@ -59,8 +59,8 @@ namespace BirthdayManager.Repository
             {
                 string sql = @"
                                 UPDATE PERSON
-                                SET NAME = @P1,
-                                SURNAME = @P2,
+                                SET FIRSTNAME = @P1,
+                                LASTNAME = @P2,
                                 BIRTHDATE = @P3,
                                 AGE = @P4
                                 WHERE ID = @P5
@@ -124,7 +124,7 @@ namespace BirthdayManager.Repository
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 string sql = @"
-                                SELECT ID, NAME, SURNAME, BIRTHDATE, AGE
+                                SELECT ID, FIRSTNAME, LASTNAME, BIRTHDATE, AGE
                                 FROM PERSON
                 ";
 
@@ -142,8 +142,8 @@ namespace BirthdayManager.Repository
                     result.Add(new Person()
                     {
                         Id = dr.GetInt32("ID"),
-                        Firstname = dr.GetString("NAME"),
-                        Lastname = dr.GetString("SURNAME"),
+                        Firstname = dr.GetString("FIRSTNAME"),
+                        Lastname = dr.GetString("LASTNAME"),
                         Birthdate = dr.GetDateTime("BIRTHDATE"),
                         Age = dr.GetInt32("AGE")
                     });
@@ -162,7 +162,7 @@ namespace BirthdayManager.Repository
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 string sql = @"
-                                SELECT ID, NAME, SURNAME, BIRTHDATE, AGE
+                                SELECT ID, FIRSTNAME, LASTNAME, BIRTHDATE, AGE
                                 FROM PERSON
                                 WHERE ID = @P1
                 ";
@@ -182,8 +182,8 @@ namespace BirthdayManager.Repository
                     result = new Person()
                     {
                         Id = dr.GetInt32("ID"),
-                        Firstname = dr.GetString("NAME"),
-                        Lastname = dr.GetString("SURNAME"),
+                        Firstname = dr.GetString("FIRSTNAME"),
+                        Lastname = dr.GetString("LASTNAME"),
                         Birthdate = dr.GetDateTime("BIRTHDATE"),
                         Age = dr.GetInt32("AGE")
                     };
@@ -202,7 +202,7 @@ namespace BirthdayManager.Repository
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 string sql = @"
-                                SELECT ID, NAME, SURNAME, BIRTHDATE, AGE
+                                SELECT ID, FIRSTNAME, LASTNAME, BIRTHDATE, AGE
                                 FROM PERSON
                                 WHERE (NAME LIKE '%' + @P1 +'%' OR SURNAME LIKE '%' + @P2 + '%')
                                 ORDER BY BIRTHDATE DESC
@@ -226,8 +226,8 @@ namespace BirthdayManager.Repository
                     result.Add(new Person()
                     {
                         Id = dr.GetInt32("ID"),
-                        Firstname = dr.GetString("NAME"),
-                        Lastname = dr.GetString("SURNAME"),
+                        Firstname = dr.GetString("FIRSTNAME"),
+                        Lastname = dr.GetString("LASTNAME"),
                         Birthdate = dr.GetDateTime("BIRTHDATE"),
                         Age = dr.GetInt32("AGE")
                     });
