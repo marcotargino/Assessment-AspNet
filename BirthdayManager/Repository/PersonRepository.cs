@@ -51,8 +51,8 @@ namespace BirthdayManager.Repository
                                 SET NAME = @P1,
                                 SURNAME = @P2,
                                 BIRTHDATE = @P3,
-                                AGE = @P4,
-                                WHERE ID = @P5;
+                                AGE = @P4
+                                WHERE ID = @P5
                 ";
 
                 var command = connection.CreateCommand();
