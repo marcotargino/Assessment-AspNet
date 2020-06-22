@@ -39,18 +39,13 @@ namespace BirthdayManager.Repository
 
                 person.Age = age;
 
-                var command = connection.CreateCommand();
-                command.CommandText = sql;
-                command.Parameters.AddWithValue("P1", person.Firstname);
-                command.Parameters.AddWithValue("P2", person.Lastname);
-                command.Parameters.AddWithValue("P3", person.Birthdate);
-                command.Parameters.AddWithValue("P4", person.Age);
-
-                command.CommandType = System.Data.CommandType.Text;
-
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                connection.Execute(sql, new
+                {
+                    P1 = person.Firstname,
+                    P2 = person.Lastname,
+                    P3 = person.Birthdate,
+                    P4 = person.Age
+                });
             }
         }
 
@@ -80,18 +75,13 @@ namespace BirthdayManager.Repository
 
                 person.Age = age;
 
-                var command = connection.CreateCommand();
-                command.CommandText = sql;
-                command.Parameters.AddWithValue("P1", person.Firstname);
-                command.Parameters.AddWithValue("P2", person.Lastname);
-                command.Parameters.AddWithValue("P3", person.Birthdate);
-                command.Parameters.AddWithValue("P4", person.Age);
-                command.Parameters.AddWithValue("P5", person.Id);
-                command.CommandType = System.Data.CommandType.Text;
-
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                connection.Execute(sql, new { 
+                    P1 = person.Firstname, 
+                    P2 = person.Lastname, 
+                    P3 = person.Birthdate, 
+                    P4 = person.Age, 
+                    P5 = person.Id 
+                });
             }
         }
 
@@ -104,17 +94,7 @@ namespace BirthdayManager.Repository
                                 WHERE ID = @P1
                 ";
 
-                var command = connection.CreateCommand();
-
-                command.CommandText = sql;
-
-                command.Parameters.AddWithValue("P1", person.Id);
-
-                command.CommandType = System.Data.CommandType.Text;
-
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                connection.Execute(sql, new { P1 = person.Id });
             }
         }
 
@@ -167,31 +147,7 @@ namespace BirthdayManager.Repository
 
                 ";
 
-                var command = connection.CreateCommand();
-
-                command.CommandText = sql;
-                command.Parameters.AddWithValue("P1", query);
-                command.Parameters.AddWithValue("P2", query);
-
-                command.CommandType = System.Data.CommandType.Text;
-
-                connection.Open();
-
-                SqlDataReader dr = command.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    result.Add(new Person()
-                    {
-                        Id = dr.GetInt32("ID"),
-                        Firstname = dr.GetString("FIRSTNAME"),
-                        Lastname = dr.GetString("LASTNAME"),
-                        Birthdate = dr.GetDateTime("BIRTHDATE"),
-                        Age = dr.GetInt32("AGE")
-                    });
-                }
-
-                connection.Close();
+                result = connection.Query<Person>(sql).ToList();
             }
 
             return result;
