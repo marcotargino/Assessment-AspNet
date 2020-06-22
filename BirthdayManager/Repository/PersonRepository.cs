@@ -1,4 +1,5 @@
 ﻿using BirthdayManager.Models;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -128,28 +129,7 @@ namespace BirthdayManager.Repository
                                 FROM PERSON
                 ";
 
-                var command = connection.CreateCommand();
-
-                command.CommandText = sql;
-                command.CommandType = System.Data.CommandType.Text;
-
-                connection.Open();
-
-                SqlDataReader dr = command.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    result.Add(new Person()
-                    {
-                        Id = dr.GetInt32("ID"),
-                        Firstname = dr.GetString("FIRSTNAME"),
-                        Lastname = dr.GetString("LASTNAME"),
-                        Birthdate = dr.GetDateTime("BIRTHDATE"),
-                        Age = dr.GetInt32("AGE")
-                    });
-                }
-
-                connection.Close();
+                result = connection.Query<Person>(sql).ToList();
             }
 
             return result;
@@ -167,29 +147,7 @@ namespace BirthdayManager.Repository
                                 WHERE ID = @P1
                 ";
 
-                var command = connection.CreateCommand();
-
-                command.CommandText = sql;
-                command.Parameters.AddWithValue("P1", id);
-                command.CommandType = System.Data.CommandType.Text;
-
-                connection.Open();
-
-                SqlDataReader dr = command.ExecuteReader();
-
-                while (dr.Read())
-                {
-                    result = new Person()
-                    {
-                        Id = dr.GetInt32("ID"),
-                        Firstname = dr.GetString("FIRSTNAME"),
-                        Lastname = dr.GetString("LASTNAME"),
-                        Birthdate = dr.GetDateTime("BIRTHDATE"),
-                        Age = dr.GetInt32("AGE")
-                    };
-                }
-
-                connection.Close();
+                result = connection.QueryFirstOrDefault<Person>(sql, new {P1 = id});
             }
 
             return result;
