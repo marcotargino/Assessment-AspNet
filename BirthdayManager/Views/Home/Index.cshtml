@@ -1,42 +1,23 @@
-﻿@model IEnumerable<BirthdayManager.Models.Person>
-
-@{
+﻿@{
     ViewData["Title"] = "Home Page";
 }
 
 <div id="home-page" class="text-center">
-    <h2 class="display-4">AT - ASP NET</h2>
-    <h3 class="display-4">Gerenciamento de Aniversários</h3>
+    <h2 class="display-4">Assessment ASP.NET</h2>
+    <h3 class="display-4">Birthday Management</h3>
 </div>
 
-<div id="Menu">
-    <h4>Acesso Rápido</h4>
-    <ul>
-        <li><h5> <a asp-area="" asp-controller="Person" asp-action="Create">Create new</a> </h5></li>
-        <li><h5><a asp-area="" asp-controller="Person" asp-action="Index">Birthday List</a></h5></li>
-    </ul>
+<div id="quick">
+    <p><a asp-area="" asp-controller="Person" asp-action="Create" class="btn btn-info">Create new</a></p>
 </div>
 
-@*<div id="AnivDia">
-    <table id="Lista_Aniversario">
-        <h4>Aniversariantes do dia</h4>
-        <thead>
-            <tr>
-                <th> Nome</th>
-                <th> Data de Nascimento</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var aniversariante in Model)
-            {
-                @if (aniversariante.DataNascimento.Month == DateTime.Today.Month && aniversariante.DataNascimento.Day == DateTime.Today.Day)
-                {
-                    <tr>
-                        <td> @aniversariante.nome  @aniversariante.sobrenome</td>
-                        <td> @aniversariante.DataNascimento.ToString("dd/MM/yyyy")</td>
-                    </tr>
-                }
-            }
-    </table>
-
-</div>*@
+<form asp-action="Search" asp-controller="Person" method="get">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label class="control-label">Search</label>
+        <input class="form-control" name="query" id="query" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>

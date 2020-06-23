@@ -4,46 +4,49 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Birthday List</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <h1>Today's Birthdays</h1>
 
-<form asp-action="Search" asp-controller="Person" method="get">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label class="control-label">Search</label>
-        <input class="form-control" name="query" id="query"/>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Search" class="btn btn-primary" />
-    </div>
-</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                First name
+            </th>
+            <th>
+                Last name
+            </th>
+            <th>
+                Birth date
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Operation
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            DateTime today = DateTime.Now.Date;
+            DateTime birthday = new DateTime(today.Year, item.Birthdate.Month, item.Birthdate.Day);
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Birth date</th>
-                <th>Age</th>
-                <th>Operation</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
+            if (today == birthday)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Firstname)
+                        @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Lastname)
+                        @Html.DisplayFor(modelItem => item.Surname)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Birthdate)
@@ -58,5 +61,63 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
+
+<h1>Birthday List</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                First name
+            </th>
+            <th>
+                Last name
+            </th>
+            <th>
+                Birth date
+            </th>
+            <th>
+                Age
+            </th>
+            <th>
+                Operation
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Birthdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Create" class="btn btn-info">Create New</a>
+</p>
